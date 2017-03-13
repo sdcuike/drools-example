@@ -1,0 +1,23 @@
+template header
+minAge
+maxAge
+
+package ruletemplate.simpleOne;
+import com.sample.Person;
+
+template "classification-rule"
+
+rule "ruletemplate simpleOne_@{row.rowNumber}"
+no-loop true
+
+    when
+       $p: Person( minAge > @{minAge}, maxAge <= @{maxAge})
+    then
+ 		modify($p){
+ 			setEnable(true);
+ 		}
+    end
+
+
+
+end template
