@@ -1,14 +1,14 @@
  package  com.sample
  
 import com.sample.DroolsTest.Message;
-import  com.apple.concurrent;
+import java.math.BigDecimal
 
  
 rule "Hello World"
     when
-        m : Message( status == Message.HELLO, myMessage : message )
+        m : Message( status == Message.HELLO,  map.getOrDefault("a","") == "A")
     then
-        System.out.println( myMessage );
+        System.out.println( m.getMessage() );
         m.setMessage( "Goodbye cruel world" );
         m.setStatus( Message.GOODBYE );
         update( m );
@@ -19,5 +19,13 @@ rule "GoodBye"
         Message( status == Message.GOODBYE, myMessage : message )
     then
         System.out.println( myMessage );
+
+end
+
+rule "GoodBye111"
+    when
+       $m: Message(BigDecimal.valueOf(Double.valueOf(map.get("amount"))) > 300 * Integer.valueOf(map.get("days")))
+    then
+        System.out.println("h      "+ $m );
 
 end

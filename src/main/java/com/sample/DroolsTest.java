@@ -4,6 +4,9 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This is a sample class to launch a rule.
  */
@@ -17,9 +20,15 @@ public class DroolsTest {
 			KieSession kSession = kContainer.newKieSession("ksession-rules");
 
 			// go !
+
 			Message message = new Message();
-			message.setMessage("Hello World");
-			message.setStatus(Message.HELLO);
+//			message.setMessage("Hello World");
+//			message.setStatus(Message.HELLO);
+			Map<String,String> map = new HashMap<>();
+			map.put("a","1");
+			map.put("amount","300.1");
+			map.put("days","1");
+			message.setMap(map);
 			kSession.insert(message);
 			kSession.fireAllRules();
 		} catch (Throwable t) {
@@ -33,6 +42,7 @@ public class DroolsTest {
 		public static final int GOODBYE = 1;
 
 		private String message;
+		private Map<String,String> map = new HashMap<>();
 
 		private int status;
 
@@ -52,6 +62,13 @@ public class DroolsTest {
 			this.status = status;
 		}
 
+		public Map<String, String> getMap() {
+			return map;
+		}
+
+		public void setMap(Map<String, String> map) {
+			this.map = map;
+		}
 	}
 
 }

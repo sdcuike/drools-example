@@ -28,6 +28,7 @@ public class RuleTemplate {
         kieSession.insert(person);
         kieSession.fireAllRules();
         System.out.println(person);
+
     }
 
 
@@ -46,5 +47,10 @@ public class RuleTemplate {
         }
         return kieHelper.build().newKieSession();
     }
+
+
+
+
+
 
 }
