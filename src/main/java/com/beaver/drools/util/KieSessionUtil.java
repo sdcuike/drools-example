@@ -7,11 +7,9 @@ import org.kie.internal.builder.conf.KnowledgeBuilderOption;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.utils.KieHelper;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -94,42 +92,8 @@ public final class KieSessionUtil extends KieHelper {
         }
     }
     
-    @Deprecated
-    public KieHelper addFromClassPathDirectory(String directoryName) {
-        try {
-            URI uri = KieSessionUtil.class.getClassLoader().getResource(directoryName).toURI();
-            File fileDir = new File(uri);
-            
-            if (!fileDir.isDirectory()) {
-                throw new IllegalArgumentException(directoryName + " must a directory");
-            }
-            
-            File[] files = fileDir.listFiles();
-            for (File f : files) {
-                addFromClassPathDirectory(f, File.separator + directoryName);
-            }
-            
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        
-        return this;
-    }
     
-    @Deprecated
-    private void addFromClassPathDirectory(File file, String parentPath) {
-        String path = parentPath + File.separator + file.getName();
-        if (!file.isDirectory()) {
-            addFromClassPath(path, StandardCharsets.UTF_8.name());
-        } else {
-            for (File f : file.listFiles()) {
-                addFromClassPathDirectory(f, path);
-            }
-        }
-    }
-    
-    
-    public <T> void excuteInsertObject(StatelessKieSession ksession, T... object) {
+    public static <T>  void excuteInsertObject(StatelessKieSession ksession, T... object) {
         ksession.execute(Arrays.asList(object));
     }
 }

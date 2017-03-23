@@ -1,0 +1,14 @@
+package com.beaver.drools.example.fact
+import java.util.UUID
+
+global java.util.List list
+global com.beaver.drools.example.service.impl.EmailServiceImpl emailService
+rule "GlobalVariablesExample"
+
+when
+    eval(true)
+then
+    list.add(UUID.randomUUID());
+    emailService.sendSMS("send ");
+
+end
