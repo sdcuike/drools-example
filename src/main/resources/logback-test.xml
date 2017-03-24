@@ -13,7 +13,7 @@
   <logger name="bitronix.tm" level="error"/>
   <logger name="org.hibernate" level="warn"/>
   
-  <root level="error">
+  <root level="INFO">
     <appender-ref ref="consoleAppender" />
   </root>
 
