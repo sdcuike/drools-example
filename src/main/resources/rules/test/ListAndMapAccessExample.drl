@@ -1,0 +1,10 @@
+package com.beaver.drools.example.fact
+import java.util.UUID
+
+rule "ListAndMapAccessExample"
+
+when
+    $p :Person(address contains "北京",exGirlfriend["one"] == "宋美龄")
+then
+    $p.setMessage("匹配成功，曾住过北京，第一任女友是宋美龄");
+end
