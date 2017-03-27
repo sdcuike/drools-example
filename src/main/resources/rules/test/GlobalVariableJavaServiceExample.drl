@@ -1,0 +1,14 @@
+package com.beaver.drools.example.fact
+import com.beaver.drools.example.service.impl.PersonServiceImpl
+import java.util.Arrays
+import java.util.List
+
+global PersonServiceImpl personService
+rule "GlobalVariableJavaServiceExample"
+
+when
+    Object()
+    $p : Person(age > 44) from personService.queryPersons()
+then
+    personService.savePerson(Arrays.asList( $p));
+end
