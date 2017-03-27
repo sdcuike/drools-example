@@ -1,0 +1,13 @@
+package com.beaver.drools.example.fact
+import java.util.UUID
+
+global java.util.List message
+rule "ListAndMapAccessExample"
+
+when
+    not (
+     Person(address contains "北京",exGirlfriend["one"] == "宋美龄")
+    )
+then
+    message.add("匹配不成功，匹配条件：曾住过北京，第一任女友是宋美龄");
+end

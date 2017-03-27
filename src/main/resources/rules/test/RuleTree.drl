@@ -1,0 +1,26 @@
+package com.beaver.drools.example.fact
+import java.util.UUID
+import com.beaver.drools.common.model.RuleResult
+import com.beaver.drools.common.model.RuleResultDetail
+
+
+rule "RuleTree1"
+when
+    $p : Person(age > 0, age < 10)
+then
+    $p.getRuleResultDetail().add(RuleResult.REJECT,"拒绝：age > 0, age < 10");
+ end
+
+rule "RuleTree2"
+when
+    $p : Person(age >=5, age <= 10)
+then
+    $p.getRuleResultDetail().add(RuleResult.REJECT,"拒绝：age >=5, age <= 10");
+end
+
+rule "RuleTree3"
+when
+    $p : Person(age >=8, age <= 10)
+then
+    $p.getRuleResultDetail().add(RuleResult.OK,"通过：age >=5, age <= 10");
+end
