@@ -93,7 +93,15 @@ public final class KieSessionUtil extends KieHelper {
     }
     
     
-    public static <T>  void excuteInsertObject(StatelessKieSession ksession, T... object) {
-        ksession.execute(Arrays.asList(object));
+    public static <T> void excuteInsertObject(StatelessKieSession ksession, T object) {
+        ksession.execute(object);
+    }
+    
+    public static <T> void excuteInsertObject(StatelessKieSession ksession, T... objects) {
+        ksession.execute(Arrays.asList(objects));
+    }
+    
+    public static <T> void excuteInsertObject(StatelessKieSession ksession, Iterable objects) {
+        ksession.execute(objects);
     }
 }
