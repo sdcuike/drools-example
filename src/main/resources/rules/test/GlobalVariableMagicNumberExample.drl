@@ -1,0 +1,12 @@
+package com.beaver.drools.example.fact
+import java.util.UUID
+import com.beaver.drools.common.model.RuleResult
+
+global Integer MAX_AGE
+rule "GlobalVariableMagicNumberExample"
+
+when
+    $p : Person(age > MAX_AGE)
+then
+    $p.getRuleResultDetail().add(RuleResult.REJECT,"age > "+ MAX_AGE);
+end
