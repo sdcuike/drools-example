@@ -2,7 +2,7 @@ import java.util.Date
 import java.util.Calendar
 
 rule "RuleDeleteExample"
-salience 2
+salience 2 //匹配的when的规则指定优先级，drools6有默认优先级，同一个文件内按先后出现顺序，这里我们也可以不指定，按默认优先级
 when
     $p :Date()
     Calendar()
