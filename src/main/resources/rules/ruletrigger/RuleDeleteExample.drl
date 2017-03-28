@@ -1,0 +1,21 @@
+import java.util.Date
+import java.util.Calendar
+
+rule "RuleDeleteExample"
+salience 2
+when
+    $p :Date()
+    Calendar()
+then
+    System.out.println("RuleDeleteExample " + $p);
+    delete($p);
+end
+
+//========================================
+rule "RuleDeleteExample trigger this rule"
+salience 1
+when
+    $p :Date()
+then
+    System.out.println("输出才是我被激活"+$p);
+end
