@@ -1,0 +1,14 @@
+import java.util.Date
+rule "RuleInsertExample insert"
+when
+    eval(true)
+then
+    insert(new Date());
+end
+
+rule "RuleInsertExample trigger this rule"
+when
+    $p :Date()
+then
+    System.out.println("我被其他rule 激活了" + $p);
+end
