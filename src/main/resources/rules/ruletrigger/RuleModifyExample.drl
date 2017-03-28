@@ -1,0 +1,14 @@
+import java.util.Calendar
+
+rule "RuleModifyExample"
+//no-loop true
+
+when
+    $p : Calendar(get(Calendar.YEAR) < 2020)
+then
+    System.out.println("YEAR:"+ $p.get(Calendar.YEAR )+ "; MONTH" + $p.get(Calendar.MONTH));
+    modify($p){
+        add(Calendar.YEAR,1),
+        add(Calendar.MONTH,1)
+    }
+end
