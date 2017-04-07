@@ -20,14 +20,18 @@ public class Person {
     private String name;
     private int age;
     private List<String> address;
-    private Map<String, String> exGirlfriend;
+    private Map<String, String> exGirlfriend = new HashMap<>();
     private String message;
     /**
      * 规则结果列表
      */
     RuleResultDetail ruleResultDetail = new RuleResultDetail();
     
-    private Map<String,Boolean> keyToFlags = new HashMap<>();
+    private Map<String, Boolean> keyToFlags = new HashMap<>();
+    
+    public void putExGirlfriend(String key, String value) {
+        exGirlfriend.put(key, value);
+    }
     
     @Override
     public String toString() {

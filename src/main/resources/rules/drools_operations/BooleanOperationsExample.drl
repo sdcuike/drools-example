@@ -1,0 +1,22 @@
+package com.beaver.drools.example.fact
+
+//规则中的条件关系：&&用简化的，表示，||拆分规则来表示
+
+rule "BooleanOperationsExample - 1"
+no-loop
+
+when
+    $p : Person(age > 10, name contains "doctor")
+then
+    System.out.println("BooleanOperationsExample - 1 " + $p);
+end
+
+//=========
+rule "BooleanOperationsExample - 2"
+no-loop
+
+when
+    $p : Person(exGirlfriend.size() > 0)
+then
+    System.out.println("BooleanOperationsExample - 2  " + $p);
+end
