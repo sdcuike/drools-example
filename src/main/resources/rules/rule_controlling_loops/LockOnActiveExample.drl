@@ -1,0 +1,26 @@
+package com.beaver.drools.example.fact
+
+rule "LockOnActiveExample-1"
+lock-on-active
+
+when
+    $p :Person(age > 20)
+then
+    System.out.println("LockOnActiveExample-1  " + $p);
+    modify($p){
+        setAge($p.getAge() - 10)
+    }
+end
+
+//=================
+rule "LockOnActiveExample-2"
+lock-on-active
+
+when
+    $p : Person(age > 30)
+then
+     System.out.println("LockOnActiveExample-2  " + $p);
+        modify($p){
+            setAge($p.getAge() - 10)
+        }
+end
