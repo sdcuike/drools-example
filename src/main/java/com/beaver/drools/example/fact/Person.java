@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ public class Person {
      * 规则结果列表
      */
     RuleResultDetail ruleResultDetail = new RuleResultDetail();
+    
+    private Map<String,Boolean> keyToFlags = new HashMap<>();
     
     @Override
     public String toString() {

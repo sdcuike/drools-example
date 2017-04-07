@@ -1,0 +1,26 @@
+package com.beaver.drools.example.fact
+
+rule "ModelPropertiesExecutionControlExample-1"
+
+when
+    $p :Person(age > 20, (keyToFlags["20"] == null || keyToFlags["20"] == false ))
+then
+    System.out.println("LockOnActiveExample-1  " + $p);
+    modify($p){
+        setAge($p.getAge() - 10),
+        getKeyToFlags().put("20",true)
+    }
+end
+
+//=================
+rule "ModelPropertiesExecutionControlExample-2"
+
+when
+    $p : Person(age > 30, (keyToFlags["30"] == null || keyToFlags["30"] == false ))
+then
+     System.out.println("LockOnActiveExample-2  " + $p);
+        modify($p){
+            setAge($p.getAge() - 10),
+            getKeyToFlags().put("30",true)
+        }
+end
