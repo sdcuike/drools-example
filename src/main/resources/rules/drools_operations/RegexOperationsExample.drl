@@ -1,0 +1,9 @@
+package com.beaver.drools.example.fact
+
+rule "RegexOperationsExample"
+
+when
+    $p : String(this matches "^[121].*")
+then
+    System.out.println($p);
+end
