@@ -1,0 +1,11 @@
+package com.beaver.drools.example.fact
+
+rule "CollectionOperationsExample -"
+
+when
+    $p :Person(name memberOf ["doctorwho","doctor"],
+        address contains "永恒国度"
+        )
+then
+    System.out.println($p);
+end

@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class Person {
     private String name;
     private int age;
-    private List<String> address;
+    private List<String> address = new ArrayList<>();
     private Map<String, String> exGirlfriend = new HashMap<>();
     private String message;
     /**
@@ -31,6 +32,10 @@ public class Person {
     
     public void putExGirlfriend(String key, String value) {
         exGirlfriend.put(key, value);
+    }
+    
+    public void addAddress(String address) {
+        this.address.add(address);
     }
     
     @Override
