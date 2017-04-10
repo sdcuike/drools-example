@@ -1,0 +1,8 @@
+package com.beaver.drools.example.fact
+import java.util.List
+rule "CollectFromObjectsExample"
+when
+    $list : List() from collect(Person())
+then
+    System.out.println($list);
+end
