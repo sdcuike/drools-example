@@ -1,0 +1,29 @@
+package com.beaver.drools.example.fact
+import java.util.List
+
+rule "TheFromClauseExample - 1"
+
+when
+    $p : Person($address : address)
+    $a : String(this != null) from $address
+then
+    System.out.println("address have " + $a);
+end
+
+//==========
+rule "TheFromClauseExample - 2"
+when
+   $p : Person($name : name)
+   $n :String()  from $name
+then
+    System.out.println("name:" + $n);
+end
+
+//==========
+rule "TheFromClauseExample - 3"
+when
+   $p : Person($age : age)
+   $a :Integer()  from $age
+then
+    System.out.println("age:" + $a);
+end
