@@ -15,20 +15,29 @@ import java.util.stream.Collectors;
  * Created by beaver on 2017/5/20.
  */
 public class TravelRuleGenerate {
-    
+    //规则包名
     private String packageName;
+    //规则需要外部类的包
     private List<String> importPackages = new ArrayList<>();
+    //规则名字
     private String ruleName;
     
-    
+    //规则匹配的类型，如 $o: OrderItem( $p : price, $code : custCode )中的OrderItem
     private String objectType;
     
+    //规则匹配类型的变量名，如 $o: OrderItem( $p : price, $code : custCode )中的OrderItem中$o
     private String objectVar;
+    
+    //规则信息
     private TravelRule travelRule;
     
+    //规则执行动作结果赋值属性名，如 $invoice.setResult(RuleResult.REJECT); 中的resultr;
     private String resultPropertyName;
+    //规则执行动作结果的提示信息赋值属性名，如   $invoice.setRemarkMessage("您的房费高于公司标准 ");中的remarkMessage.
     private String alertMessagePropertyName;
     
+    //规则匹配属性别名，如data["EXPENSE_LEVEL"] not in ("总裁"),
+    // 中的EXPENSE_LEVEL在travelRule中droolsRule中的名不一样，类似mybatis映射一下
     private Map<String, String> rulePropertyNameAlias = new HashMap<>();
     
     public String getPackageName() {

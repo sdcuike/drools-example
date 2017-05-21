@@ -55,7 +55,8 @@ public class TravleRuelTest {
                                .filter(t -> t.getCompanyName() != null && !t.getCompanyName().isEmpty())
                                .collect(Collectors.toList());
         
-       System.out.println(new Gson().toJson(entityList));
+        
+        System.out.println(new Gson().toJson(entityList));
         
         Set<String> set = entityList.stream().map(TravelRule::getRuleId).collect(Collectors.toSet());
         if (set.size() != entityList.size()) {
