@@ -114,6 +114,7 @@ public class TravelRuleGenerate {
         this.rulePropertyNameAlias = rulePropertyNameAlias;
     }
     
+    //规则生成
     public String Generate() {
         StringBuilder sb = new StringBuilder();
         
@@ -255,7 +256,7 @@ public class TravelRuleGenerate {
         throw new UnsupportedOperationException(content);
     }
     
-    public String generateRuleName() {
+    private String generateRuleName() {
         StringBuilder sb = new StringBuilder();
         sb.append(travelRule.getCompanyName())
           .append("-")
