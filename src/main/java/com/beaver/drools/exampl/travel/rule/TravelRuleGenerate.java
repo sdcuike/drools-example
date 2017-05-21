@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Created by beaver on 2017/5/20.
+ * Created by beaver on 2017/5/20.<br>
+ * 简单规则组成,并不不包含drools复杂的语法规则
  */
 public class TravelRuleGenerate {
     //规则包名
@@ -38,6 +39,7 @@ public class TravelRuleGenerate {
     
     //规则匹配属性别名，如data["EXPENSE_LEVEL"] not in ("总裁"),
     // 中的EXPENSE_LEVEL在travelRule中droolsRule中的名不一样，类似mybatis映射一下
+    //不过key为正则表达式
     private Map<String, String> rulePropertyNameAlias = new HashMap<>();
     
     public String getPackageName() {
