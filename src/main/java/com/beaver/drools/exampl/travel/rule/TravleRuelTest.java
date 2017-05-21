@@ -2,6 +2,7 @@ package com.beaver.drools.exampl.travel.rule;
 
 import com.beaver.drools.util.KieSessionUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.javafunk.excelparser.SheetParser;
@@ -54,9 +55,10 @@ public class TravleRuelTest {
         entityList = entityList.stream()
                                .filter(t -> t.getCompanyName() != null && !t.getCompanyName().isEmpty())
                                .collect(Collectors.toList());
-        
-        
-        System.out.println(new Gson().toJson(entityList));
+    
+    
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        System.out.println(gson.toJson(entityList));
         
         Set<String> set = entityList.stream().map(TravelRule::getRuleId).collect(Collectors.toSet());
         if (set.size() != entityList.size()) {
