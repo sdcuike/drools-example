@@ -1,22 +1,16 @@
-package com.beaver.drools.example.fact
+package com.zhenhui.atlantis.brms.web.rest.dto
 
-//规则中的条件关系：&&用简化的，表示，||拆分规则来表示
+import java.math.BigDecimal
+import com.beaver.drools.common.model.RuleResult
 
-rule "BooleanOperationsExample - 1"
-no-loop
+rule "微民 住宿费  {EXP_LEVEL}IN[1] AND {ER_EXP_FEE}>{ER_DAYS}*600"
 
-when
-    $p : Person(age > 10, name contains "doctor")
-then
-    System.out.println("BooleanOperationsExample - 1 " + $p);
-end
-
-//=========
-rule "BooleanOperationsExample - 2"
-no-loop
-
-when
-    $p : Person(exGirlfriend.size() > 0)
-then
-    System.out.println("BooleanOperationsExample - 2  " + $p);
+dialect "mvel"
+    when
+       $invoice: MatchInvoiceTravelRuleRequestDto(
+        data["EXPENSE_LEVEL"] in ("1"),
+        BigDecimal.valueOf(Double.valueOf(data.get("INVOICE_AMOUNT"))) > 600 * Double.valueOf(data.get("days")) )
+    then
+        $invoice.setResult(RuleResult.REJECT);
+        $invoice.setRemarkMessage("微民 住宿费  {EXP_LEVEL}IN[1] AND {ER_EXP_FEE}>{ER_DAYS}*600");
 end

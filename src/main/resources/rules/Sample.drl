@@ -24,7 +24,7 @@ end
 
 rule "GoodBye111"
     when
-       $m: Message(BigDecimal.valueOf(Double.valueOf(map.get("amount"))) > 300 * Integer.valueOf(map.get("days")))
+       $m: Message(BigDecimal.valueOf(Double.valueOf(map["amount"])) > 300 * Integer.valueOf(map["days"]))
     then
         System.out.println("h      "+ $m );
 
