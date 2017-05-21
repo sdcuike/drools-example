@@ -118,22 +118,19 @@ public class TravelRuleGenerate {
         StringBuilder sb = new StringBuilder();
         
         //规则头部
-        sb.append(packageName).append("\n").append("\n");
+        sb.append("package ").append(packageName).append("\n").append("\n");
         
-        importPackages.stream().forEach(t -> sb.append(t).append("\n"));
+        importPackages.stream().forEach(t -> sb.append("import ").append(t).append("\n"));
         
         sb.append("\n\n");
         
         //规则名称
-        sb.append("rule  \" ").append(travelRule.getCompanyName())
-          .append("  ")
-          .append(travelRule.getExpenseType())
-          .append("  ")
-          .append(ruleName).append(" \"").append("\n\n");
+        sb.append("rule  \"").append(generateRuleName()).append("\n\n");
         
         //规则条件
         sb.append("when").append("\n");
         sb.append("  ").append(objectVar).append(" : ").append(objectType).append("(").append("\n");
+        
         //规则条件内容
         List<String> rules = generateWhenContent();
         rules.stream().forEach(t -> {
@@ -151,10 +148,12 @@ public class TravelRuleGenerate {
         //规则执行动作
         sb.append("then \n");
         
+        //规则执行结果
         sb.append("  ").append(objectVar).append(".set").append(StringUtils.capitalize(resultPropertyName)).append("(");
         RuleResult ruleResult = RuleResult.valueOf(travelRule.getRuleAction());
         sb.append(RuleResult.class.getSimpleName()).append(".").append(ruleResult.name()).append("); \n");
         
+        //规则执行提示信息
         sb.append("  ").append(objectVar).append(".set").append(StringUtils.capitalize(alertMessagePropertyName)).append("(\"");
         sb.append(travelRule.getAlertMessage()).append(" \");");
         
@@ -164,14 +163,23 @@ public class TravelRuleGenerate {
     
     //{EXP_LEVEL}IN[一般员工] AND {ER_LOCATION}NOT IN[北京/上海/深圳] AND {ER_EXP_FEE}>{ER_DAYS}*300
     private List<String> generateWhenContent() {
-        String rule = travelRule.getRule();
+        String rule = travelRule.getRule().trim();
+        if (rule.contains("OR") || rule.contains("or")) {
+            throw new UnsupportedOperationException("请知悉drools 的基本使用：复杂的规则拆成简单的规则执行，or的规则请拆分");
+        }
+        
+        if (rule.contains("and")) {
+            throw new UnsupportedOperationException("AND条件单词大写");
+        }
+        
+        
         List<String> ruelList = Splitter.on(Pattern.compile("AND")).trimResults().splitToList(rule);
         
         List<String> rules = ruelList.stream().map(this::generateARule).collect(Collectors.toList());
         return rules;
     }
     
-    
+    //去除AND条件的一条简单规则
     private String generateARule(final String rule) {
         if (StringUtils.deleteWhitespace(rule).contains("NOTIN")) {
             Pair<String, String> pair = getRulePropertyNameAliasAndValuesForIn(rule, "NOT");
@@ -246,4 +254,16 @@ public class TravelRuleGenerate {
         
         throw new UnsupportedOperationException(content);
     }
+    
+    public String generateRuleName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(travelRule.getCompanyName())
+          .append("-")
+          .append(travelRule.getExpenseType())
+          .append("-")
+          .append(ruleName).append("\"");
+        
+        return sb.toString();
+    }
+    
 }

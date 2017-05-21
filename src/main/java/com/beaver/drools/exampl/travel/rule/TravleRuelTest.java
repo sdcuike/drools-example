@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
  */
 public class TravleRuelTest {
     
-    static String packageName = "package com.beaver.drools.exampl.travel.rule";
+    static String packageName = "com.beaver.drools.exampl.travel.rule";
     static List<String> importPackages = Arrays.asList(
-            "import java.math.*"
-            , "import com.beaver.drools.common.model.*");
+            "java.math.*"
+            , "com.beaver.drools.common.model.*");
     
     
     static String sheetName = "工作表1";
