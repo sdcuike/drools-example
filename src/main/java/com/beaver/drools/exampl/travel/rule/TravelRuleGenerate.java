@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
  * 简单规则组成,并不不包含drools复杂的语法规则
  */
 public class TravelRuleGenerate {
+    
+    
     //规则包名
     private String packageName;
     //规则需要外部类的包
@@ -181,6 +183,8 @@ public class TravelRuleGenerate {
             throw new RuntimeException(generate, e);
         }
         travelRule.setDroolsRule(generate);
+        
+        
         return travelRule.getDroolsRule();
     }
     
@@ -217,6 +221,9 @@ public class TravelRuleGenerate {
         if (rule.contains(">")) {
             return getRulePropertyNameAliasAndValuesForCompare(rule, ">");
         }
+        if (rule.contains("!=")) {
+            return getRulePropertyNameAliasAndValuesForCompare(rule, "=");
+        }
         if (rule.contains("=")) {
             return getRulePropertyNameAliasAndValuesForCompare(rule, "=");
         }
@@ -251,8 +258,8 @@ public class TravelRuleGenerate {
     //{ER_EXP_FEE}>{ER_DAYS}*300     to
     // BigDecimal.valueOf(Double.valueOf(data.["INVOICE_AMOUNT"])) > 300 * Double.valueOf(data["days"])
     private String getRulePropertyNameAliasAndValuesForCompare(final String rule, final String separator) {
-        if (!Arrays.asList(">", "<", "=").contains(separator.trim())) {
-            throw new UnsupportedOperationException();
+        if (!Arrays.asList(">", "<", "=", "!=").contains(separator.trim())) {
+            throw new UnsupportedOperationException("{rule:" + rule + ",separator:" + separator + "}");
         }
         
         List<String> list = Splitter.on(separator.trim()).trimResults().splitToList(rule);
@@ -261,15 +268,16 @@ public class TravelRuleGenerate {
         String template1 = "BigDecimal.valueOf(Double.valueOf(data[\"%s\"]))";
         String tempalte2 = "Double.valueOf(data[\"%s\"])";
         
-        Pair<String, String> rulePropertyNameAlias1 = getRulePropertyNameAlias(StringUtils.removeAll(express1, "\\d|\\*|\\+|-"));
+        Pair<String, String> rulePropertyNameAlias1 = getRulePropertyNameAlias(StringUtils.removeAll(express1, "\\d|\\*|\\+|-|!"));
         express1 = String.format(template1, rulePropertyNameAlias1.getValue());
         
-        Pair<String, String> rulePropertyNameAlias2 = getRulePropertyNameAlias(StringUtils.removeAll(express2, "\\d|\\*|\\+|-"));
+        Pair<String, String> rulePropertyNameAlias2 = getRulePropertyNameAlias(StringUtils.removeAll(express2, "\\d|\\*|\\+|-|!"));
         
         String replace = rule.replace(rulePropertyNameAlias1.getKey(), express1);
         
         if (rulePropertyNameAlias2 == null) {
-            return "data[\"" + rulePropertyNameAlias1.getValue() + "\"] == null";
+            String operator = (separator == "=") ? "==" : "!=";
+            return "data[\"" + rulePropertyNameAlias1.getValue() + "\"] " + operator + " null";
         }
         express2 = String.format(tempalte2, rulePropertyNameAlias2.getValue());
         

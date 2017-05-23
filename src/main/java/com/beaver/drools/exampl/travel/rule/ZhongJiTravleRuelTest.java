@@ -24,7 +24,7 @@ public class ZhongJiTravleRuelTest {
     
     
     static String sheetName = "工作表1";
-    static String fileName = "zhongji-rule.xlsx";
+    static String fileName = "zhongji-rule20170523.xlsx";
     
     static String objectType = "MatchInvoiceTravelRuleRequestDto";
     static String objectVar = "$invoice";
@@ -42,17 +42,16 @@ public class ZhongJiTravleRuelTest {
         rulePropertyNameAlias.put("ER_HOTEL_FEE", "INVOICE_AMOUNT");
         rulePropertyNameAlias.put("ER_DAYS", "days");
         rulePropertyNameAlias.put("ER_EXP_FEE", "INVOICE_AMOUNT");
-        rulePropertyNameAlias.put("ER_FLIGHT_LEVE", "t");
-        rulePropertyNameAlias.put("ER_TRAIN_LEVEL", "t");
-        rulePropertyNameAlias.put("ER_SHIP_LEVEL", "t");
-        rulePropertyNameAlias.put("ER_REASON", "t");
-        rulePropertyNameAlias.put("ER_FIGHT_LEVEL", "t");
-        rulePropertyNameAlias.put("ER_COACH_LEVEL", "t");
+        rulePropertyNameAlias.put("ER_FIGHT_LEVEL", "FLIGHT_LEVEL");
+        rulePropertyNameAlias.put("ER_TRAIN_LEVEL", "TRAIN_LEVEL");
+        rulePropertyNameAlias.put("ER_SHIP_LEVEL", "SHIP_LEVEL");
+        rulePropertyNameAlias.put("ER_REASON", "EXCEED_REASON");
+        rulePropertyNameAlias.put("ER_COACH_LEVEL", "COACH_LEVEL");
         
     }
     
     public static void main(String[] args) throws IOException, XlsMapperException {
-        String filePath = FilloExcel.class.getClassLoader().getResource(fileName).getFile();
+        String filePath = ZhongJiTravleRuelTest.class.getClassLoader().getResource(fileName).getFile();
         
         XlsMapper xlsMapper = new XlsMapper();
         TravelRuleSheet sheet = xlsMapper.load(new FileInputStream(filePath), TravelRuleSheet.class);
