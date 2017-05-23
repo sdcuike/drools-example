@@ -18,9 +18,7 @@ import java.util.stream.Collectors;
  * 简单规则组成,并不不包含drools复杂的语法规则；<br>
  * 支持的规则描述：<br>
  * {ER_LOCATION_COUNTRY}IN[中国] AND {EXP_LEVEL}IN[4/5] AND {ER_EXP_FEE}>{ER_DAYS}*80 AND {ER_REASON}!=[]  <br>
- *  支持IN,NOT IN, > ,< ,=,!=,  属性用英文{}隔离，属性的取值用[]隔离，[]内无值，视为null.   <br>
- *
- *
+ * 支持IN,NOT IN, > ,< ,=,!=,  属性用英文{}隔离，属性的取值用[]隔离，[]内无值，视为null.   <br>
  */
 public class TravelRuleGenerate {
     
@@ -273,14 +271,17 @@ public class TravelRuleGenerate {
         String template1 = "BigDecimal.valueOf(Double.valueOf(data[\"%s\"]))";
         String tempalte2 = "Double.valueOf(data[\"%s\"])";
         
-        Pair<String, String> rulePropertyNameAlias1 = getRulePropertyNameAlias(StringUtils.removeAll(express1, "\\d|\\*|\\+|-|!"));
+        Pair<String, String> rulePropertyNameAlias1 = getRulePropertyNameAlias(StringUtils.removeAll(express1, "\\*|\\+|-|!"));
         express1 = String.format(template1, rulePropertyNameAlias1.getValue());
         
-        Pair<String, String> rulePropertyNameAlias2 = getRulePropertyNameAlias(StringUtils.removeAll(express2, "\\d|\\*|\\+|-|!"));
+        Pair<String, String> rulePropertyNameAlias2 = getRulePropertyNameAlias(StringUtils.removeAll(express2, "\\*|\\+|-|!"));
         
         String replace = rule.replace(rulePropertyNameAlias1.getKey(), express1);
         
         if (rulePropertyNameAlias2 == null) {
+            if (StringUtils.removeAll(express2, "\\*|\\+|-|!").matches("^\\d+$")){
+                return replace;
+            }
             String operator = (separator.equals("=")) ? "==" : "!=";
             return "data[\"" + rulePropertyNameAlias1.getValue() + "\"] " + operator + " null";
         }
@@ -290,10 +291,19 @@ public class TravelRuleGenerate {
         return replace;
     }
     
-    private Pair<String, String> getRulePropertyNameAlias(final String content) {
-        if (content.equals("")) {
+    private Pair<String, String> getRulePropertyNameAlias( String content) {
+        
+        //值为空，null
+        String empty = StringUtils.deleteWhitespace(content);
+        if (empty.equals("[]") || empty.equals("")) {
             return null;
         }
+        if (empty.matches("^\\d+$")){
+            return null;
+        }
+    
+        content = StringUtils.removeAll(content,"\\d");
+    
         if (rulePropertyNameAliasIsRegularExpression) {
             for (Entry<String, String> entry : rulePropertyNameAlias.entrySet()) {
                 Pattern compile = Pattern.compile(entry.getKey());
@@ -318,11 +328,7 @@ public class TravelRuleGenerate {
             }
         }
         
-        //值为空，null
-        String empty = StringUtils.deleteWhitespace(content);
-        if (empty.equals("[]")) {
-            return null;
-        }
+        
         throw new UnsupportedOperationException(content);
     }
     
