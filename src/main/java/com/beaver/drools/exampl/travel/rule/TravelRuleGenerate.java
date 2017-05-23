@@ -222,7 +222,7 @@ public class TravelRuleGenerate {
             return getRulePropertyNameAliasAndValuesForCompare(rule, ">");
         }
         if (rule.contains("!=")) {
-            return getRulePropertyNameAliasAndValuesForCompare(rule, "=");
+            return getRulePropertyNameAliasAndValuesForCompare(rule, "!=");
         }
         if (rule.contains("=")) {
             return getRulePropertyNameAliasAndValuesForCompare(rule, "=");
@@ -276,7 +276,7 @@ public class TravelRuleGenerate {
         String replace = rule.replace(rulePropertyNameAlias1.getKey(), express1);
         
         if (rulePropertyNameAlias2 == null) {
-            String operator = (separator == "=") ? "==" : "!=";
+            String operator = (separator.equals("=")) ? "==" : "!=";
             return "data[\"" + rulePropertyNameAlias1.getValue() + "\"] " + operator + " null";
         }
         express2 = String.format(tempalte2, rulePropertyNameAlias2.getValue());
