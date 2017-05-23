@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by beaver on 2017/5/23.
  */
-@XlsSheet(name = "s1")
+@XlsSheet(name = "工作表1")
 public class TravelRuleSheet {
     @XlsHorizontalRecords(headerRow = 0, headerColumn = 0)
     List<TravelRuleInfo> travelRules;
@@ -29,7 +29,7 @@ public class TravelRuleSheet {
                 '}';
     }
     
-    public static class TravelRuleInfo {
+    public static class TravelRuleInfo implements TravelRuleInterface {
         
         //公司名称
         @XlsColumn(columnName = "来源")
@@ -61,73 +61,89 @@ public class TravelRuleSheet {
         
         private String droolsRule;
         
+        @Override
         public String getCompanyName() {
             return companyName;
         }
         
+        @Override
         public void setCompanyName(String companyName) {
             this.companyName = companyName;
         }
         
+        @Override
         public String getExpenseType() {
             return expenseType;
         }
         
+        @Override
         public void setExpenseType(String expenseType) {
             this.expenseType = expenseType;
         }
         
-        public String getRule() {
-            return rule;
-        }
-        
-        public void setRule(String rule) {
-            this.rule = rule;
-        }
-        
+        @Override
         public String getApplyPoint() {
             return applyPoint;
         }
         
+        @Override
         public void setApplyPoint(String applyPoint) {
             this.applyPoint = applyPoint;
         }
         
+        @Override
         public String getRuleAction() {
             return ruleAction;
         }
         
+        @Override
         public void setRuleAction(String ruleAction) {
             this.ruleAction = ruleAction;
         }
         
+        @Override
+        public String getRule() {
+            return rule;
+        }
+        
+        @Override
+        public void setRule(String rule) {
+            this.rule = rule;
+        }
+        
+        @Override
         public String getAlertMessage() {
             return alertMessage;
         }
         
+        @Override
         public void setAlertMessage(String alertMessage) {
             this.alertMessage = alertMessage;
         }
         
+        @Override
         public String getRuleId() {
             return ruleId;
         }
         
+        @Override
         public void setRuleId(String ruleId) {
             this.ruleId = ruleId;
         }
         
+        @Override
         public String getDroolsRule() {
             return droolsRule;
         }
         
+        @Override
         public void setDroolsRule(String droolsRule) {
             this.droolsRule = droolsRule;
         }
-    
+        
         @Override
         public String toString() {
-            return "TravelRule{" +
+            return "TravelRuleInfo{" +
                     "companyName='" + companyName + '\'' +
                     ", expenseType='" + expenseType + '\'' +
                     ", applyPoint='" + applyPoint + '\'' +
