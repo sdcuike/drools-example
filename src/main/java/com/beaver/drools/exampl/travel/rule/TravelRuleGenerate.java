@@ -15,7 +15,12 @@ import java.util.stream.Collectors;
 
 /**
  * Created by beaver on 2017/5/20.<br>
- * 简单规则组成,并不不包含drools复杂的语法规则
+ * 简单规则组成,并不不包含drools复杂的语法规则；<br>
+ * 支持的规则描述：<br>
+ * {ER_LOCATION_COUNTRY}IN[中国] AND {EXP_LEVEL}IN[4/5] AND {ER_EXP_FEE}>{ER_DAYS}*80 AND {ER_REASON}!=[]  <br>
+ *  支持IN,NOT IN, > ,< ,=,!=,  属性用英文{}隔离，属性的取值用[]隔离，[]内无值，视为null.   <br>
+ *
+ *
  */
 public class TravelRuleGenerate {
     
