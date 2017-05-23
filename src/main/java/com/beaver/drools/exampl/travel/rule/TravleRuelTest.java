@@ -24,8 +24,8 @@ public class TravleRuelTest {
     
     
     static String sheetName = "工作表1";
-//    static String fileName = "腾讯差标规则1.xlsx";
-    static String fileName = "副本中集差标规则Final.xlsx";
+    static String fileName = "腾讯差标规则1.xlsx";
+//    static String fileName = "副本中集差标规则Final.xlsx";
     
     static String objectType = "MatchInvoiceTravelRuleRequestDto";
     static String objectVar = "$invoice";

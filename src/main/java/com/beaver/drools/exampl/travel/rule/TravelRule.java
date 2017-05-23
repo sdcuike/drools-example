@@ -8,7 +8,7 @@ import org.javafunk.excelparser.annotations.ParseType;
  * Created by beaver on 2017/5/20.
  */
 @ExcelObject(parseType = ParseType.ROW, start = 2, end = 61)
-public class TravelRule {
+public class TravelRule implements TravelRuleInterface{
     
     //公司名称
     @ExcelField(position = 1)

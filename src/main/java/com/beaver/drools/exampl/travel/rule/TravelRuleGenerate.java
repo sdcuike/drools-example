@@ -30,7 +30,7 @@ public class TravelRuleGenerate {
     private String objectVar;
     
     //规则信息
-    private TravelRule travelRule;
+    private TravelRuleInterface travelRule;
     
     //规则执行动作结果赋值属性名，如 $invoice.setResult(RuleResult.REJECT); 中的resultr;
     private String resultPropertyName;
@@ -66,11 +66,11 @@ public class TravelRuleGenerate {
         this.ruleName = ruleName;
     }
     
-    public TravelRule getTravelRule() {
+    public TravelRuleInterface getTravelRule() {
         return travelRule;
     }
     
-    public void setTravelRule(TravelRule travelRule) {
+    public void setTravelRule(TravelRuleInterface travelRule) {
         this.travelRule = travelRule;
     }
     
