@@ -88,6 +88,11 @@
             <artifactId>fillo</artifactId>
             <version>1.15</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.mygreen</groupId>
+            <artifactId>xlsmapper</artifactId>
+            <version>1.6</version>
+        </dependency>
     </dependencies>
 
     <repositories>

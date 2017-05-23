@@ -196,7 +196,7 @@ public class TravelRuleGenerate {
             return getRulePropertyNameAliasAndValuesForCompare(rule, ">");
         }
         
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException(rule);
     }
     
     //{EXP_LEVEL}IN[一般员工] , {ER_LOCATION}NOT IN[北京/上海/深圳]  to
