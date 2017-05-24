@@ -1,0 +1,11 @@
+package com.beaver.drools.example.fact
+
+rule "StartsWithOpeartionExample -"
+
+when
+    $p :Person(
+          exGirlfriend["g1"]  str[startsWith] "docto"
+        )
+then
+    System.out.println($p);
+end
