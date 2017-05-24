@@ -16,7 +16,7 @@ public class MatchesManyExample {
         kieSessionUtil.verifyRules();
         StatelessKieSession statelessKieSession = kieSessionUtil.build().newStatelessKieSession();
         
-        String str = "121ass";
+        String str = "121a";
         
         boolean matches = str.matches("^(22|121a).*");
         System.out.println(matches);
