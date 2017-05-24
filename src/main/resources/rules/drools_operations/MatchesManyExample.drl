@@ -1,0 +1,9 @@
+package com.beaver.drools.example.fact
+
+rule "MatchesManyExample"
+
+when
+    $p : String(this matches "^(22|121a).*")
+then
+    System.out.println($p);
+end
