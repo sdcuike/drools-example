@@ -1,0 +1,10 @@
+package com.beaver.drools.example.fact
+
+rule "NotMatchesManyExample"
+
+when
+    $p : String(this.substring(0,3)  in ("CNN","JPN")
+    )
+then
+    System.out.println("==" + $p);
+end
